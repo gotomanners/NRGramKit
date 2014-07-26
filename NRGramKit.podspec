@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
   s.homepage     = "https://github.com/NextRoot/NRGramKit"
   s.license      = { :type => 'MIT', :file => 'LICENSE.txt' }
   s.author       = { "Raul Andrisan" => "raul@nextroot.com" }
-  s.source       = { :git => "https://github.com/NextRoot/NRGramKit.git", :tag=>s.version.to_s }
+  s.source       = { :git => "https://github.com/gotomanners/NRGramKit.git", :tag=>s.version.to_s }
   s.platform     = :ios, '5.0'
 
   s.source_files = 'NRGramKit/*.{h,m}','NRGramKit/Model/*.{h,m}'

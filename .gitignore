@@ -37,3 +37,4 @@ xcuserdata
 
 
 Pods/
+*.podspec

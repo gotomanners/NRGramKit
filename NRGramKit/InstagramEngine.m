@@ -25,32 +25,34 @@ InstagramEngine* _sharedIGEngine;
 
 
 -(AFHTTPRequestOperation*)bodyForPath:(NSString*)path
-                             verb:(NSString*)verb 
-                             body:(NSMutableDictionary*)body
-                     onCompletion:(InstagramBodyResponseBlock) completionBlock
-                          onError:(void (^)( NSError *error)) errorBlock
+                                 verb:(NSString*)verb
+                                 body:(NSMutableDictionary*)body
+                         onCompletion:(InstagramBodyResponseBlock) completionBlock
+                              onError:(void (^)( NSError *error)) errorBlock
 {
+    NSError *error = nil;
     
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",BASE_URL,path]];
+    NSMutableURLRequest *request = [[AFJSONRequestSerializer serializer] requestWithMethod:verb
+                                                                                 URLString:[NSString stringWithFormat:@"%@%@",BASE_URL,path]
+                                                                                parameters:body
+                                                                                     error:&error];
     
-    AFHTTPClient* client = [[AFHTTPClient alloc]initWithBaseURL:[NSURL URLWithString:BASE_URL]];
-    [client setParameterEncoding:AFFormURLParameterEncoding];
-    NSMutableURLRequest* request = [client requestWithMethod:verb path:path parameters:body];
-    
-    
-    AFHTTPRequestOperation* operation = [client HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSError* error = nil;
-        id object = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:&error];
-        completionBlock(object);
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-         errorBlock(error);
-    }];
-
-    
-
-    [client enqueueHTTPRequestOperation:operation];
-    
-    return operation;
+    if (error) {
+        errorBlock(error);
+        return nil;
+    }
+    else {
+        AFHTTPRequestOperation *operation = [[AFHTTPRequestOperationManager manager] HTTPRequestOperationWithRequest:request
+                                                                                                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                                                                                                 completionBlock(responseObject);
+                                                                                                             }
+                                                                                                             failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                                                                                                 errorBlock(error);
+                                                                                                             }];
+        [[[AFHTTPRequestOperationManager manager] operationQueue] addOperation:operation];
+        
+        return operation;
+    }
 }
 
 @end

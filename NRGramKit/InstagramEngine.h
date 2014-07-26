@@ -14,7 +14,7 @@ typedef void (^InstagramBodyResponseBlock)(NSDictionary* body);
 
 +(InstagramEngine*)sharedEngine;
 
--(AFJSONRequestOperation*)bodyForPath:(NSString*)path
+-(AFHTTPRequestOperation*)bodyForPath:(NSString*)path
                                  verb:(NSString*)verb
                                  body:(NSMutableDictionary*)body
                          onCompletion:(InstagramBodyResponseBlock) completionBlock

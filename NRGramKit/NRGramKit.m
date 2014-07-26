@@ -529,7 +529,7 @@ static NSString* callback_url;
     NSString* laterParam = laterDate!=nil?[NSString stringWithFormat:@"&min_timestamp=%d",(int)[laterDate timeIntervalSince1970]]:@"";
       NSString* countParam = count>0?[NSString stringWithFormat:@"&count=%d",count]:@"";
 
-    NSString* url = [NSString stringWithFormat:@"%@/%@/%@?lat=%f&lng=%f&radius=%d&%@=%@%@%@%@",kInstagramApiBaseUrl,@"media",@"search",lat,lng,radius,currentParam, currentParamValue,laterParam,earlierParam,countParam];
+    NSString* url = [NSString stringWithFormat:@"%@/%@/%@?lat=%f&lng=%f&distance=%d&%@=%@%@%@%@",kInstagramApiBaseUrl,@"media",@"search",lat,lng,radius,currentParam, currentParamValue,laterParam,earlierParam,countParam];
     [NRGramKit getUrl:url withCallback:^(IGPagination* pagination,NSDictionary* dict)
      {
          if(dict!=nil)

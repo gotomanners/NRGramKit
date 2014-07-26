@@ -789,7 +789,7 @@ static NSString* callback_url;
                                   @"object":@"user",
                                   @"aspect":@"media",
                                   @"verify_token":@"nrgramkit",
-                                  @"callback_url":@"http://andrisan-office.no-ip.org:3002/callbacks/geo/user_subscription"
+                                  @"callback_url":callback_url
                              };
     [self addSubscriptionWithParams:params_dict andCallback:callback];
     
@@ -805,7 +805,7 @@ static NSString* callback_url;
                                   @"object_id":locationId,
                                   @"aspect":@"media",
                                   @"verify_token":@"nrgramkit",
-                                  @"callback_url":@"http://andrisan-office.no-ip.org:3002/callbacks/geo/location_subscription"
+                                  @"callback_url":callback_url
                                   };
     [self addSubscriptionWithParams:params_dict andCallback:callback];
 }
@@ -819,7 +819,7 @@ static NSString* callback_url;
                                   @"object_id":tag,
                                   @"aspect":@"media",
                                   @"verify_token":@"nrgramkit",
-                                  @"callback_url":@"http://andrisan-office.no-ip.org:3002/callbacks/geo/tag_subscription"
+                                  @"callback_url":callback_url
                                   };
     [self addSubscriptionWithParams:params_dict andCallback:callback];
 }
@@ -835,7 +835,7 @@ static NSString* callback_url;
                                   @"radius":@(radius),
                                   @"aspect":@"media",
                                   @"verify_token":@"nrgramkit",
-                                  @"callback_url":@"http://andrisan-office.no-ip.org:3002/callbacks/geo/tag_subscription"
+                                  @"callback_url":callback_url
                                   };
     [self addSubscriptionWithParams:params_dict andCallback:callback];
 }
